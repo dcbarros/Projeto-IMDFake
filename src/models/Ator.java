@@ -7,8 +7,8 @@ public class Ator extends Artista{
 
     private List<Filme> producoes;  
 
-    public Ator(String nome, String sobrenome, String paisOrigem) {
-        super(nome, sobrenome, paisOrigem);
+    public Ator(String nome, String paisOrigem) {
+        super(nome, paisOrigem);
         this.producoes = new ArrayList<>();
     }
 

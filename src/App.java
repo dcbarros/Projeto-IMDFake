@@ -9,7 +9,7 @@ public class App {
 
         List<Ator> teste = _atoresRespository.procurarPorNome("Tom");
         for (Ator ator : teste) {
-            System.out.println(ator.getNome() + " " + ator.getSobrenome());
+            System.out.println(ator.getNome());
         }
     }
 }

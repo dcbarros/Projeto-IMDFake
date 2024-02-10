@@ -17,15 +17,15 @@ public class AtoresRepository {
 
     private void inicializarDados() {
         // Adicione os atores iniciais à lista
-        adicionar(new Ator("Tim", "Robbins", "Estados Unidos"));
-        adicionar(new Ator("Morgan", "Freeman", "Estados Unidos"));
-        adicionar(new Ator("Bob", "Gunton", "Estados Unidos"));
-        adicionar(new Ator("Tim", "Hanks", "Estados Unidos"));
-        adicionar(new Ator("Robin", "Wrigth", "Estados Unidos"));
-        adicionar(new Ator("Gary", "Sinise", "Estados Unidos"));
-        adicionar(new Ator("Brad", "Pitt", "Estados Unidos"));
-        adicionar(new Ator("Edward", "Norton", "Estados Unidos"));
-        adicionar(new Ator("Meat", "Loaf", "Estados Unidos"));
+        adicionar(new Ator("Tim Robbins", "Estados Unidos"));
+        adicionar(new Ator("Morgan Freeman", "Estados Unidos"));
+        adicionar(new Ator("Bob Gunton", "Estados Unidos"));
+        adicionar(new Ator("Tim Hanks", "Estados Unidos"));
+        adicionar(new Ator("Robin Wrigth", "Estados Unidos"));
+        adicionar(new Ator("Gary Sinise", "Estados Unidos"));
+        adicionar(new Ator("Brad Pitt", "Estados Unidos"));
+        adicionar(new Ator("Edward Norton", "Estados Unidos"));
+        adicionar(new Ator("Meat Loaf", "Estados Unidos"));
     }
 
     public void adicionar(Ator ator) {

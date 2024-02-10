@@ -3,12 +3,10 @@ package models;
 public abstract class Artista {
 
     private String nome;
-    private String sobrenome;
     private String paisOrigem;
 
-    public Artista(String nome, String sobrenome, String paisOrigem) {
+    public Artista(String nome, String paisOrigem) {
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.paisOrigem = paisOrigem;
     }
 
@@ -17,12 +15,6 @@ public abstract class Artista {
     }
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public String getSobrenome() {
-        return sobrenome;
-    }
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
     public String getPaisOrigem() {
         return paisOrigem;

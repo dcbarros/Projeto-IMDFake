@@ -7,8 +7,8 @@ public class Diretor extends Artista{
 
     private List<Filme> producoes;
     
-    public Diretor(String nome, String sobrenome, String paisOrigem) {
-        super(nome, sobrenome, paisOrigem);
+    public Diretor(String nome, String paisOrigem) {
+        super(nome, paisOrigem);
         this.producoes = new ArrayList<>();
     }
 

@@ -20,5 +20,4 @@ public class Ator extends Artista{
         this.producoes = producoes;
     }
 
-    
 }

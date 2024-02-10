@@ -16,11 +16,10 @@ public class AtoresRepository {
     }
 
     private void inicializarDados() {
-        // Adicione os atores iniciais à lista
         adicionar(new Ator("Tim Robbins", "Estados Unidos"));
         adicionar(new Ator("Morgan Freeman", "Estados Unidos"));
         adicionar(new Ator("Bob Gunton", "Estados Unidos"));
-        adicionar(new Ator("Tim Hanks", "Estados Unidos"));
+        adicionar(new Ator("Tom Hanks", "Estados Unidos"));
         adicionar(new Ator("Robin Wrigth", "Estados Unidos"));
         adicionar(new Ator("Gary Sinise", "Estados Unidos"));
         adicionar(new Ator("Brad Pitt", "Estados Unidos"));
@@ -36,13 +35,22 @@ public class AtoresRepository {
         return Collections.unmodifiableList(this.dbAtores);
     }
 
-    public List<Ator> procurarPorNome(String nome){
+    public List<Ator> procurarPorPartesNome(String input){
         List<Ator> atoresEncontrados = new ArrayList<>();
         for (Ator ator : dbAtores) {
-            if(ator.getNome().toLowerCase().contains(nome.toLowerCase())){
+            if(ator.getNome().toLowerCase().contains(input.toLowerCase())){
                 atoresEncontrados.add(ator);
             }
         }
         return atoresEncontrados;
+    }
+
+    public Ator procurarPorNome(String nome){
+        for (Ator ator : dbAtores) {
+            if(ator.getNome().equalsIgnoreCase(nome)){
+                return ator;
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,3 @@
-package models;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -8,7 +6,6 @@ public class Filme {
     private Integer anoLancamento;
     private Diretor diretor;
     private List<Ator> atores;
-    private List<Roterista> roteristas;
     private String estudio;
 
     public Filme(String nome, 
@@ -54,14 +51,5 @@ public class Filme {
     public void setEstudio(String estudio) {
         this.estudio = estudio;
     }
-
-    public List<Roterista> getRoteristas() {
-        return Collections.unmodifiableList(this.roteristas);
-    }
-
-    public void setRoteristas(List<Roterista> roteristas) {
-        this.roteristas = roteristas;
-    }
-
-    
+   
 }

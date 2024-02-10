@@ -4,6 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Filme {
+
+    private static Long nextId = 0L;
+    private Long id;
+
     private String nome;
     private Integer anoLancamento;
     private Diretor diretor;
@@ -20,6 +24,7 @@ public class Filme {
         this.diretor = diretor;
         this.atores = atores;
         this.estudio = estudio;
+        this.id = nextId++;
     }
     // TODO: Fazer a implementaçao de melhorias do código
     
@@ -53,5 +58,10 @@ public class Filme {
     public void setEstudio(String estudio) {
         this.estudio = estudio;
     }
+
+    public Long getId() {
+        return id;
+    }
+    
    
 }

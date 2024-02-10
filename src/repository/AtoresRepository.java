@@ -35,6 +35,16 @@ public class AtoresRepository {
         return Collections.unmodifiableList(this.dbAtores);
     }
 
+    public Ator getPorId(Long id){
+        int indice = id.intValue();
+        if (indice >= 0 && indice < dbAtores.size()) {
+            return this.dbAtores.get(indice);
+        } else {
+            System.out.println("ID do ator fora do intervalo: " + id);
+            return null;
+        }
+    }
+
     public List<Ator> procurarPorPartesNome(String input){
         List<Ator> atoresEncontrados = new ArrayList<>();
         for (Ator ator : dbAtores) {

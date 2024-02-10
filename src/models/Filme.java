@@ -5,29 +5,33 @@ import java.util.List;
 
 public class Filme {
 
-    private static Long nextId = 0L;
-    private Long id;
-
     private String nome;
     private Integer anoLancamento;
     private Diretor diretor;
     private List<Ator> atores;
     private String estudio;
+    private List<String> genero;
+    private Integer score;
 
     public Filme(String nome, 
-                    Integer anoLancamento, 
-                    Diretor diretor, 
-                    List<Ator> atores, 
-                String estudio) {
-        this.nome = nome;
-        this.anoLancamento = anoLancamento;
-        this.diretor = diretor;
-        this.atores = atores;
-        this.estudio = estudio;
-        this.id = nextId++;
+        Integer anoLancamento, 
+        Diretor diretor, 
+        List<Ator> atores, 
+        String estudio, 
+        List<String> genero,
+        Integer score) {
+            this.nome = nome;
+            this.anoLancamento = anoLancamento;
+            this.diretor = diretor;
+            this.atores = atores;
+            this.estudio = estudio;
+            this.genero = genero;
+            this.score = score;
     }
+    
     // TODO: Fazer a implementaçao de melhorias do código
     
+
     public String getNome() {
         return nome;
     }
@@ -59,8 +63,20 @@ public class Filme {
         this.estudio = estudio;
     }
 
-    public Long getId() {
-        return id;
+    public List<String> getGenero() {
+        return genero;
+    }
+
+    public void setGenero(List<String> genero) {
+        this.genero = genero;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
     
    

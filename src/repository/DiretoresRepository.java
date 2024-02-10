@@ -31,6 +31,10 @@ public class DiretoresRepository {
         return Collections.unmodifiableList(this.dbDiretores);
     }
 
+    public Diretor getPorId(Long id){
+        return this.dbDiretores.get(id.intValue());
+    }
+
     public List<Diretor> procurarPorPartesNome(String input){
         List<Diretor> diretoresEncontrados = new ArrayList<>();
         for (Diretor diretor : dbDiretores) {

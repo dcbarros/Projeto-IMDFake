@@ -1,16 +1,19 @@
 import java.util.Map;
 
-import models.Ator;
+import models.Diretor;
+import models.Filme;
 import repository.AtoresRepository;
+import repository.DiretoresRepository;
+import repository.FilmesRepository;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        AtoresRepository _AtoresRepository = AtoresRepository.getInstance();
-        _AtoresRepository.addAtor(new Ator("Pedro de Lara","Brasil"));
-        _AtoresRepository.addAtor(new Ator("Pedro de Lara","Brasil"));
-        _AtoresRepository.addAtor(new Ator("Juininho","Brasil"));
-        for (Map.Entry<Long, Ator> entry : _AtoresRepository.getTodos().entrySet()) {
-            System.out.println("Chave: " + entry.getKey() + ", Valor: " + entry.getValue().getNome());
+        DiretoresRepository _diretoresRepository = DiretoresRepository.getInstance();
+        FilmesRepository _filmesRepository = FilmesRepository.getInstance();
+        AtoresRepository _atoresRepository = AtoresRepository.getInstance();
+
+        for (Filme f : _diretoresRepository.getDiretorPorChave(1L).getProducoes()) {
+            System.out.println(f.getNome());
         }
     }
 }

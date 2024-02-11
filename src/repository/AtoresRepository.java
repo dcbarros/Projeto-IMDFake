@@ -49,6 +49,13 @@ public class AtoresRepository {
         return dbAtores;
     }
 
+    public Ator getAtorPorChave(Long key){
+        if(containsKey(key)){
+            return this.dbAtores.get(key);
+        }
+        return null;
+    }
+
     public void addAtor(Ator ator){
         if(!containsAtor(ator)){
             this.id = idNext++;

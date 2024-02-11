@@ -38,7 +38,7 @@ public class DiretoresRepository {
     public Map<Long, Diretor> getTodos() {
         return this.dbDiretores;
     }
-    
+
     public Diretor getDiretorPorChave(Long key){
         if(containsKey(key)){
             return this.dbDiretores.get(key);
@@ -46,16 +46,29 @@ public class DiretoresRepository {
         return null;
     }
 
+    public Map<Long, Diretor> getDiretorPorNome(String nome){
+        for (Map.Entry<Long,Diretor> diretor : dbDiretores.entrySet()) {
+            if(diretor.getValue().getNome().equalsIgnoreCase(nome)){
+                Map<Long,Diretor> diretorEncontrado = new HashMap<>();
+                diretorEncontrado.put(diretor.getKey(),diretor.getValue());
+                return diretorEncontrado;
+            }
+        }
+        return null;
+    }
+
     //Fazer o método else
     public void addDiretor(Diretor diretor){
-        if(!containsAtor(diretor)){
+        if(!containsDiretor(diretor)){
             this.id = idNext++;
             this.dbDiretores.put(id,diretor);
-        }else{}
+        }else{
+
+        }
     }
 
 
-    public boolean containsAtor(Diretor diretor){
+    private boolean containsDiretor(Diretor diretor){
         for (Map.Entry<Long, Diretor> diretoresBanco : this.dbDiretores.entrySet()) {
             if(diretoresBanco.getValue().getNome().equalsIgnoreCase(diretor.getNome())){
                 return true;
@@ -64,7 +77,7 @@ public class DiretoresRepository {
         return false;
     }
 
-    public boolean containsKey(Long key) {
+    private boolean containsKey(Long key) {
         return this.dbDiretores.containsKey(key);
     }
 

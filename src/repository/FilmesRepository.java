@@ -114,5 +114,40 @@ public class FilmesRepository {
         }
     }
 
+    public Map<Long,Filme> getFilmePorNome(String nome){
+        for (Map.Entry<Long,Filme> filme : dbFilmes.entrySet()) {
+            if(filme.getValue().getNome().equalsIgnoreCase(nome)){
+                Map<Long,Filme> filmeEncontrado = new HashMap<>();
+                filmeEncontrado.put(filme.getKey(),filme.getValue());
+                return filmeEncontrado;
+            }
+        }
+        return null;
+    }
+
+    public Map<Long, Filme> getTodos(){
+        return this.dbFilmes;
+    }
+
+    public void addFilme(Filme filme){
+        if(!containsFilme(filme)){
+            this.id = idNext++;
+            this.dbFilmes.put(id, filme);
+        }
+    }
+
+    private boolean containsFilme(Filme filme){
+        for (Map.Entry<Long, Filme> filmeBanco : this.dbFilmes.entrySet()) {
+            if(filmeBanco.getValue().getNome().equalsIgnoreCase(filme.getNome())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean containsKey(Long key) {
+        return this.dbFilmes.containsKey(key);
+    }
+
 
 }

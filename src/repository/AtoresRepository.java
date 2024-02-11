@@ -56,6 +56,17 @@ public class AtoresRepository {
         return null;
     }
 
+    public Map<Long, Ator> getAtorPorNome(String nome){
+        for (Map.Entry<Long,Ator> ator : dbAtores.entrySet()) {
+            if(ator.getValue().getNome().equalsIgnoreCase(nome)){
+                Map<Long,Ator> atorEncontrado = new HashMap<>();
+                atorEncontrado.put(ator.getKey(),ator.getValue());
+                return atorEncontrado;
+            }
+        }
+        return null;
+    }
+
     public void addAtor(Ator ator){
         if(!containsAtor(ator)){
             this.id = idNext++;
@@ -63,7 +74,7 @@ public class AtoresRepository {
         }
     }
 
-    public boolean containsAtor(Ator ator){
+    private boolean containsAtor(Ator ator){
         for (Map.Entry<Long, Ator> atoresBanco : this.dbAtores.entrySet()) {
             if(atoresBanco.getValue().getNome().equalsIgnoreCase(ator.getNome())){
                 return true;
@@ -72,12 +83,8 @@ public class AtoresRepository {
         return false;
     }
 
-    public boolean containsKey(Long key) {
+    private boolean containsKey(Long key) {
         return this.dbAtores.containsKey(key);
     }
-
-    // public void removeAtores(String key) {
-    //     data.remove(key);
-    // }
 
 }

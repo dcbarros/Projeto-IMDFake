@@ -67,7 +67,6 @@ public class DiretoresRepository {
         }
     }
 
-
     private boolean containsDiretor(Diretor diretor){
         for (Map.Entry<Long, Diretor> diretoresBanco : this.dbDiretores.entrySet()) {
             if(diretoresBanco.getValue().getNome().equalsIgnoreCase(diretor.getNome())){

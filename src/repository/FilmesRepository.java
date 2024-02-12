@@ -47,7 +47,7 @@ public class FilmesRepository {
         Ator ator9 = _atoresRepository.getAtorPorChave(9L);
 
         this.id = idNext++;
-        Filme filme1 = new Filme("Os Condenados de Shawshank"
+        Filme filme1 = new Filme("Os Clondenados de Shawshank"
                                     ,1994
                                     ,diretor1, 
                                     List.of(ator1,ator2,ator3), 
@@ -115,14 +115,13 @@ public class FilmesRepository {
     }
 
     public Map<Long,Filme> getFilmePorNome(String nome){
+        Map<Long,Filme> listaFilmes = new HashMap<>();
         for (Map.Entry<Long,Filme> filme : dbFilmes.entrySet()) {
-            if(filme.getValue().getNome().equalsIgnoreCase(nome)){
-                Map<Long,Filme> filmeEncontrado = new HashMap<>();
-                filmeEncontrado.put(filme.getKey(),filme.getValue());
-                return filmeEncontrado;
+            if(filme.getValue().getNome().toLowerCase().contains(nome.toLowerCase())){
+                listaFilmes.put(filme.getKey(), filme.getValue());
             }
         }
-        return null;
+        return listaFilmes;
     }
 
     public Map<Long, Filme> getTodos(){

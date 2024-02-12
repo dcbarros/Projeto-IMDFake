@@ -15,4 +15,8 @@ public class FilmeController {
     public void addFilme(Filme filme){
         _filmeService.addFilme(filme);
     }
+
+    public Map<Long,Filme> getFilmePorNome(String nome){
+        return _filmeService.getFilmePorNome(nome);
+    }
 }

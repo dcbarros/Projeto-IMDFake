@@ -15,6 +15,14 @@ public class FilmeService {
         return _filmesRepository.getTodos();
     }
 
+    public Map<Long, Filme> getFilmePorNome(String nome){
+        Map<Long,Filme> filmeEncontrado = _filmesRepository.getFilmePorNome(nome);
+        if(filmeEncontrado.isEmpty()){
+            return null;
+        }
+        return filmeEncontrado;
+    }
+
     public void addFilme(Filme filme){
         if(filme.equals(null)){
             System.out.println("Deve-se ter um filme para se adicionar");

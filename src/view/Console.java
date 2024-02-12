@@ -9,6 +9,7 @@ import controller.AtorController;
 import controller.DiretorController;
 import controller.FilmeController;
 import models.Ator;
+import models.Diretor;
 import models.Filme;
 
 public class Console {
@@ -64,6 +65,10 @@ public class Console {
                     limparTela();
                     addAtor();     
                     break; 
+                case 5:
+                    limparTela();
+                    addDiretor();     
+                    break; 
                 case 8:
                     limparTela();
                     System.out.println("Obrigado!!!"); 
@@ -80,10 +85,10 @@ public class Console {
         try {
             limparTela();
             listarAtoresPlataforma();
-            System.out.print("Qual o nome completo do ator, caso não queira adicionar aperte ENTER: ");
+            System.out.print("Qual o nome completo do(a) ator(ris), caso não queira adicionar aperte ENTER: ");
             String nome = scanner.nextLine();
             if(!nome.isBlank()){
-                System.out.print("Qual o pais que o ator nasceu: ");
+                System.out.print("Qual o pais que o(a) ator(ris) nasceu: ");
                 String localNascimento = scanner.nextLine();
                 Ator ator = new Ator(nome, localNascimento);
                 _atorController.addAtor(ator);
@@ -91,7 +96,26 @@ public class Console {
             limparTela();
         } catch (Exception e) {
             limparTela();
-            System.out.println("Ocorreu um erro ao cadastrar o ator");
+            System.out.println("Ocorreu um erro ao cadastrar o(a) ator(ris)");
+        }
+    }
+
+    private void addDiretor(){
+        try {
+            limparTela();
+            listarDiretoresPlataforma();
+            System.out.print("Qual o nome completo do(a) diretor(a), caso não queira adicionar aperte ENTER: ");
+            String nome = scanner.nextLine();
+            if(!nome.isBlank()){
+                System.out.print("Qual o pais que o(a) diretor(a) nasceu: ");
+                String localNascimento = scanner.nextLine();
+                Diretor diretor = new Diretor(nome, localNascimento);
+                _diretorController.addDiretor(diretor);
+            }
+            limparTela();
+        } catch (Exception e) {
+            limparTela();
+            System.out.println("Ocorreu um erro ao cadastrar o(a) diretor(a)");
         }
     }
 
@@ -204,6 +228,15 @@ public class Console {
         System.out.println("Lista de Atores Cadastrados");
         for (Map.Entry<Long,Ator> ator : atores.entrySet()) {
             System.out.printf("%d - %s\n", ator.getKey(), ator.getValue().getNome());
+        }
+        System.out.println();
+    }
+
+    private void listarDiretoresPlataforma(){
+        Map<Long,Diretor> diretores = _diretorController.getDiretores();
+        System.out.println("Lista de Diretores Cadastrados");
+        for (Map.Entry<Long,Diretor> diretor : diretores.entrySet()) {
+            System.out.printf("%d - %s\n", diretor.getKey(), diretor.getValue().getNome());
         }
         System.out.println();
     }

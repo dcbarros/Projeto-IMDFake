@@ -65,25 +65,27 @@ public class Console {
         for (Map.Entry<Long, Filme> filmeSet : filmesPlataforma.entrySet()) {
             Filme filme = filmeSet.getValue();
             System.out.printf("%d - %s (%s)  %d/100\n", filmeSet.getKey(),filme.getNome(),filme.getEstudio(), filme.getScore());
-            if(filme.getDiretor()==null){
+            if(filme.getDiretor() == null){
                 System.out.println("Dirigido por: Diretor não encontrado.");
             }else{
                 System.out.printf("Dirigido por: %s (%s)\n",filme.getDiretor().getNome(),filme.getDiretor().getPaisOrigem());
             }
-            if(filme.getAtores() == null){
-                System.out.println("Estrelado por: Atores não encontrados.");
-            }else{
+            try {
                 for (Ator ator : filme.getAtores()) {
                     System.out.printf("\t%s (%s)\n", ator.getNome(), ator.getPaisOrigem());
                 }
                 System.out.println();
+            } catch (Exception e) {
+                System.out.println("Estrelado por: Atores não encontrados.");
             }
         }
-        System.out.println("\n\nClique em qualquer tecla para continuar.");
+        System.out.println("\nClique em qualquer tecla para continuar.");
         scanner.nextLine();
     }
 
     private void addFilme(){
+        limparTela();
+        System.out.println("Cadastro de Filmes\n\n");
         System.out.print("Digite o Nome do Filme: ");
         String nome = scanner.nextLine();
         System.out.print("Digite o Ano de Lançamento do Filme: ");

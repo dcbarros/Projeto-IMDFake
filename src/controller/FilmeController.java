@@ -11,4 +11,8 @@ public class FilmeController {
     public Map<Long, Filme> getFilmes(){
         return _filmeService.getFilmes();
     }
+
+    public void addFilme(Filme filme){
+        _filmeService.addFilme(filme);
+    }
 }

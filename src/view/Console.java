@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -40,8 +42,11 @@ public class Console {
             scanner.nextLine();
             switch (opcao) {
                 case 1:
-                    listarTodosFilmes();          
-                    break;    
+                    getTodosFilmes();          
+                    break;  
+                case 3:
+                    addFilme();          
+                    break;  
                 case 8:
                     limparTela();
                     System.out.println("Obrigado!!!"); 
@@ -54,22 +59,55 @@ public class Console {
         fecharScanner();
     }
 
-    private void listarTodosFilmes(){
+    private void getTodosFilmes(){
         limparTela();
         Map<Long, Filme> filmesPlataforma = this._filmeController.getFilmes();
         for (Map.Entry<Long, Filme> filmeSet : filmesPlataforma.entrySet()) {
             Filme filme = filmeSet.getValue();
             System.out.printf("%d - %s (%s)  %d/100\n", filmeSet.getKey(),filme.getNome(),filme.getEstudio(), filme.getScore());
-            System.out.printf("Dirigido por: %s (%s)\n",filme.getDiretor().getNome(),filme.getDiretor().getPaisOrigem());
-            System.out.println("Estrelado por:");
-            for (Ator ator : filme.getAtores()) {
-                System.out.printf("\t%s (%s)\n", ator.getNome(), ator.getPaisOrigem());
+            if(filme.getDiretor()==null){
+                System.out.println("Dirigido por: Diretor não encontrado.");
+            }else{
+                System.out.printf("Dirigido por: %s (%s)\n",filme.getDiretor().getNome(),filme.getDiretor().getPaisOrigem());
             }
-            System.out.println();
+            if(filme.getAtores() == null){
+                System.out.println("Estrelado por: Atores não encontrados.");
+            }else{
+                for (Ator ator : filme.getAtores()) {
+                    System.out.printf("\t%s (%s)\n", ator.getNome(), ator.getPaisOrigem());
+                }
+                System.out.println();
+            }
         }
         System.out.println("\n\nClique em qualquer tecla para continuar.");
         scanner.nextLine();
     }
 
-
+    private void addFilme(){
+        System.out.print("Digite o Nome do Filme: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o Ano de Lançamento do Filme: ");
+        Integer anoLancamento = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Digite o Nome do Estúdio: ");
+        String estudio = scanner.nextLine();
+        System.out.print("Digite o Score do Filme na Plataforma: ");
+        Integer score = scanner.nextInt();
+        scanner.nextLine();
+        Integer auxiliar = 1;
+        String opcaoGenero;
+        List<String> generos = new ArrayList<>();
+        while(true){
+            System.out.printf("Digite o %d° gênero do filme, se quiser terminar a lista é só apertar Enter: ", auxiliar);
+            opcaoGenero = scanner.nextLine();
+            if(opcaoGenero.isEmpty()){
+                break;
+            }
+            auxiliar++;
+            generos.add(opcaoGenero);
+        }
+        
+        Filme filme = new Filme(nome, anoLancamento, null, null, estudio, generos, score);
+        _filmeController.addFilme(filme);
+    }
 }

@@ -14,4 +14,11 @@ public class FilmeService {
         }
         return _filmesRepository.getTodos();
     }
+
+    public void addFilme(Filme filme){
+        if(filme.equals(null)){
+            System.out.println("Deve-se ter um filme para se adicionar");
+        }
+        _filmesRepository.addFilme(filme);
+    }
 }

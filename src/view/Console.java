@@ -69,16 +69,45 @@ public class Console {
                     limparTela();
                     addDiretor();     
                     break; 
+                case 6:
+                    limparTela();
+                    getTodosFilmes();
+                    System.out.print("Digite o id do filme escolhido para associar o ator: ");
+                    Long idFilme = scanner.nextLong();
+                    scanner.nextLine();
+                    Map<Long,Filme> filme = _filmeController.getFilmePorId(idFilme);
+                    if(filme == null){
+                        limparTela();
+                        System.out.println("Filme não Cadastrado!");
+                        break;
+                    }
+                    System.out.println();
+                    listarAtoresPlataforma();
+                    System.out.printf("Digite o id do(a) ator(ris) ao filme %s: ", filme.get(idFilme).getNome());
+                    Long idAtor = scanner.nextLong();
+                    scanner.nextLine();
+                    addFilmeAoAtor(idAtor,filme.get(idFilme));
+                    limparTela();
+                    break;
+                case 7:
+                    break;
                 case 8:
                     limparTela();
                     System.out.println("Obrigado!!!"); 
                     continuar = false;  
                     break;
                 default:
+                    System.out.println("Opção não existente");
                     break;   
             }
         }
         fecharScanner();
+    }
+
+    private void addFilmeAoAtor(Long idAtor, Filme filme){
+        _filmeController.addFilmeAoAtor(idAtor, filme);
+        limparTela();
+        System.out.println("Associação Realizada com Sucesso!");
     }
 
     private void addAtor(){
@@ -161,32 +190,6 @@ public class Console {
         }
     }
 
-    private void getTodosFilmes(){
-        limparTela();
-        Map<Long, Filme> filmesPlataforma = this._filmeController.getFilmes();
-        for (Map.Entry<Long, Filme> filmeSet : filmesPlataforma.entrySet()) {
-            Filme filme = filmeSet.getValue();
-            System.out.printf("%d - %s (%s)  %d/100\n", filmeSet.getKey(),filme.getNome(),filme.getEstudio(), filme.getScore());
-            if(filme.getDiretor() == null){
-                System.out.println("Dirigido por: Diretor não encontrado.");
-            }else{
-                System.out.printf("Dirigido por: %s (%s)\n",filme.getDiretor().getNome(),filme.getDiretor().getPaisOrigem());
-            }
-            try {
-                System.out.println("Estrelado por: ");
-                for (Ator ator : filme.getAtores()) {
-                    System.out.printf("\t%s (%s)\n", ator.getNome(), ator.getPaisOrigem());
-                }
-                System.out.println();
-            } catch (Exception e) {
-                System.out.println("Estrelado por: Atores não encontrados.");
-            }
-        }
-        System.out.println("\nClique em qualquer tecla para continuar.");
-        scanner.nextLine();
-        limparTela();
-    }
-
     private void addFilme(){
         try {
             limparTela();
@@ -214,13 +217,40 @@ public class Console {
                 generos.add(opcaoGenero);
             }
             
-            Filme filme = new Filme(nome, anoLancamento, null, null, estudio, generos, score);
+            Filme filme = new Filme(nome, anoLancamento, null, new ArrayList<>(), estudio, generos, score);
             _filmeController.addFilme(filme);
             System.out.println("Filme adicionado com sucesso!");
         } catch (Exception e) {
             limparTela();
             System.out.println("Ocorreu um erro na hora de cadastrar o filme.");
         }
+    }
+
+    private void getTodosFilmes(){
+        limparTela();
+        Map<Long, Filme> filmesPlataforma = this._filmeController.getFilmes();
+        System.out.println("Filmes Cadastrados\n");
+        for (Map.Entry<Long, Filme> filmeSet : filmesPlataforma.entrySet()) {
+            Filme filme = filmeSet.getValue();
+            System.out.printf("%d - %s (%s)  %d/100\n", filmeSet.getKey(),filme.getNome(),filme.getEstudio(), filme.getScore());
+            if(filme.getDiretor() == null){
+                System.out.println("Dirigido por: Diretor não encontrado.");
+            }else{
+                System.out.printf("Dirigido por: %s (%s)\n",filme.getDiretor().getNome(),filme.getDiretor().getPaisOrigem());
+            }
+            try {
+                System.out.println("Estrelado por: ");
+                for (Ator ator : filme.getAtores()) {
+                    System.out.printf("\t%s (%s)\n", ator.getNome(), ator.getPaisOrigem());
+                }
+                System.out.println();
+            } catch (Exception e) {
+                System.out.println("Estrelado por: Atores não encontrados.");
+            }
+        }
+        System.out.println("\nClique em qualquer tecla para continuar.");
+        scanner.nextLine();
+        limparTela();
     }
 
     private void listarAtoresPlataforma(){

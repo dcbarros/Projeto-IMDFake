@@ -12,11 +12,20 @@ public class FilmeController {
         return _filmeService.getFilmes();
     }
 
+    
+    public Map<Long,Filme> getFilmePorNome(String nome){
+        return _filmeService.getFilmePorNome(nome);
+    }
+    
+    public Map<Long,Filme> getFilmePorId(Long id){
+        return _filmeService.getFilmePorId(id);
+    }
+
     public void addFilme(Filme filme){
         _filmeService.addFilme(filme);
     }
 
-    public Map<Long,Filme> getFilmePorNome(String nome){
-        return _filmeService.getFilmePorNome(nome);
+    public void addFilmeAoAtor(Long id, Filme filme){
+        _filmeService.addFilmeAoAtor(id, filme);
     }
 }

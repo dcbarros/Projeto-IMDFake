@@ -1,5 +1,6 @@
 package repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +48,25 @@ public class FilmesRepository {
         Ator ator9 = _atoresRepository.getAtorPorChave(9L);
 
         this.id = idNext++;
-        Filme filme1 = new Filme("Os Clondenados de Shawshank"
+        List<Ator> castAtores1 = new ArrayList<>();
+        castAtores1.add(ator1);
+        castAtores1.add(ator2);
+        castAtores1.add(ator3);
+        List<Ator> castAtores2 = new ArrayList<>();
+        castAtores2.add(ator4);
+        castAtores2.add(ator5);
+        castAtores2.add(ator6);
+        List<Ator> castAtores3 = new ArrayList<>();
+        castAtores3.add(ator7);
+        castAtores3.add(ator8);
+        castAtores3.add(ator9);
+
+        Filme filme1 = new Filme("Os Condenados de Shawshank"
                                     ,1994
                                     ,diretor1, 
-                                    List.of(ator1,ator2,ator3), 
+                                    castAtores1, 
                                     "Warner Bros. Pictures", 
-                                    List.of("Drama"), 
+                                    new ArrayList<>(List.of("Drama")), 
                                     93);
         dbFilmes.put(id,filme1);
         atribuirFilmeADiretor(1L, filme1);
@@ -64,31 +78,31 @@ public class FilmesRepository {
         Filme filme2 = new Filme("Forrest Gump"
                                     ,1994
                                     ,diretor2, 
-                                    List.of(ator4,ator5,ator6), 
+                                    castAtores2, 
                                     "Paramout", 
-                                    List.of("Drama, Romance"), 
+                                    new ArrayList<>(List.of("Drama, Romance")), 
                                     88);
 
         dbFilmes.put(id,filme2);
         atribuirFilmeADiretor(2L, filme2);
-        atribuirFilmeAAtor(4L, filme1);
-        atribuirFilmeAAtor(5L, filme1);
-        atribuirFilmeAAtor(6L, filme1);
+        atribuirFilmeAAtor(4L, filme2);
+        atribuirFilmeAAtor(5L, filme2);
+        atribuirFilmeAAtor(6L, filme2);
 
         this.id = idNext++;
         Filme filme3 = new Filme("Clube da Luta"
                                     ,1999
                                     ,diretor3, 
-                                    List.of(ator7,ator8,ator9), 
+                                    castAtores3, 
                                     "Fox Studios", 
-                                    List.of("Drama"), 
+                                    new ArrayList<>(List.of("Drama")), 
                                     87);
 
         dbFilmes.put(id,filme3);
         atribuirFilmeADiretor(3L, filme3);
-        atribuirFilmeAAtor(7L, filme1);
-        atribuirFilmeAAtor(8L, filme1);
-        atribuirFilmeAAtor(9L, filme1);
+        atribuirFilmeAAtor(7L, filme3);
+        atribuirFilmeAAtor(8L, filme3);
+        atribuirFilmeAAtor(9L, filme3);
 
     }
 
@@ -108,9 +122,17 @@ public class FilmesRepository {
         if(ator.equals(null)){
             System.out.println("O Id: "+ id +" não existe");
         }else{
-            List<Filme> producoes = ator.getProducoes();
-            producoes.add(filme);
-            ator.setProducoes(producoes);
+            if (!filme.getAtores().contains(ator) || filme.getAtores().isEmpty()) {
+
+                List<Filme> producoes = new ArrayList<>(ator.getProducoes());
+                producoes.add(filme);
+                ator.setProducoes(producoes);
+    
+
+                List<Ator> estrelasProducao = new ArrayList<>(filme.getAtores());
+                estrelasProducao.add(ator);
+                filme.setAtores(estrelasProducao);
+            }
         }
     }
 
@@ -122,6 +144,15 @@ public class FilmesRepository {
             }
         }
         return listaFilmes;
+    }
+
+    public Map<Long,Filme> getFilmePorId(Long id){
+        if(containsKey(id)){
+            Map<Long,Filme> filmeEncontrado = new HashMap<>();
+            filmeEncontrado.put(id, this.dbFilmes.get(id));
+            return filmeEncontrado;
+        }
+        return null;
     }
 
     public Map<Long, Filme> getTodos(){

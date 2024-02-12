@@ -23,10 +23,18 @@ public class FilmeService {
         return filmeEncontrado;
     }
 
+    public Map<Long, Filme> getFilmePorId(Long id){
+        return _filmesRepository.getFilmePorId(id);
+    }
+
     public void addFilme(Filme filme){
         if(filme.equals(null)){
             System.out.println("Deve-se ter um filme para se adicionar");
         }
         _filmesRepository.addFilme(filme);
+    }
+
+    public void addFilmeAoAtor(Long id, Filme filme){
+        _filmesRepository.atribuirFilmeAAtor(id, filme);
     }
 }

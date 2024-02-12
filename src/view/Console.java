@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import controller.AtorController;
+import controller.DiretorController;
 import controller.FilmeController;
 import models.Ator;
 import models.Filme;
@@ -12,6 +14,9 @@ import models.Filme;
 public class Console {
 
     FilmeController _filmeController = new FilmeController();
+    AtorController _atorController = new AtorController();
+    DiretorController _diretorController = new DiretorController();
+
     private Scanner scanner;
 
     private void limparTela(){
@@ -54,7 +59,11 @@ public class Console {
                 case 3:
                     limparTela();
                     addFilme();          
-                    break;  
+                    break;
+                case 4:
+                    limparTela();
+                    addAtor();     
+                    break; 
                 case 8:
                     limparTela();
                     System.out.println("Obrigado!!!"); 
@@ -67,9 +76,29 @@ public class Console {
         fecharScanner();
     }
 
+    private void addAtor(){
+        try {
+            limparTela();
+            listarAtoresPlataforma();
+            System.out.print("Qual o nome completo do ator, caso não queira adicionar aperte ENTER: ");
+            String nome = scanner.nextLine();
+            if(!nome.isBlank()){
+                System.out.print("Qual o pais que o ator nasceu: ");
+                String localNascimento = scanner.nextLine();
+                Ator ator = new Ator(nome, localNascimento);
+                _atorController.addAtor(ator);
+            }
+            limparTela();
+        } catch (Exception e) {
+            limparTela();
+            System.out.println("Ocorreu um erro ao cadastrar o ator");
+        }
+    }
+
     private void getFilme(String input){
         Map<Long, Filme> filmeEncontrado = _filmeController.getFilmePorNome(input);
         limparTela();
+        System.out.println("Filmes Cadastrados \n");
         if(input.isBlank()){
             System.out.println("O nome do filme deve ser diferente de vazio.");
             limparTela();
@@ -168,5 +197,14 @@ public class Console {
             limparTela();
             System.out.println("Ocorreu um erro na hora de cadastrar o filme.");
         }
+    }
+
+    private void listarAtoresPlataforma(){
+        Map<Long,Ator> atores = _atorController.getAtores();
+        System.out.println("Lista de Atores Cadastrados");
+        for (Map.Entry<Long,Ator> ator : atores.entrySet()) {
+            System.out.printf("%d - %s\n", ator.getKey(), ator.getValue().getNome());
+        }
+        System.out.println();
     }
 }

@@ -32,7 +32,7 @@ public class DiretoresRepository {
         dbDiretores.put(id,new Diretor("Robert Zameckis", "Estados Unidos"));
         this.id = idNext++;
         dbDiretores.put(id,new Diretor("David Fincher", "Estados Unidos"));
-        this.id = idNext++;
+
     }
 
     public Map<Long, Diretor> getTodos() {

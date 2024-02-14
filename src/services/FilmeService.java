@@ -37,4 +37,8 @@ public class FilmeService {
     public void addFilmeAoAtor(Long id, Filme filme){
         _filmesRepository.atribuirFilmeAAtor(id, filme);
     }
+
+    public void addFilmeAoDiretor(Long id, Filme filme){
+        _filmesRepository.atribuirFilmeADiretor(id, filme);
+    }
 }

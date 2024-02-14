@@ -111,6 +111,9 @@ public class FilmesRepository {
         if(diretor.equals(null)){
             System.out.println("O Id: "+ id +" não existe");
         }else{
+            System.out.println("Estou aqui");
+            filme.setDiretor(diretor);
+
             List<Filme> producoes = diretor.getProducoes();
             producoes.add(filme);
             diretor.setProducoes(producoes);

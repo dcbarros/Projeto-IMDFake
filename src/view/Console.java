@@ -73,9 +73,9 @@ public class Console {
                     limparTela();
                     getTodosFilmes();
                     System.out.print("Digite o id do filme escolhido para associar o ator: ");
-                    Long idFilme = scanner.nextLong();
+                    Long idFilmeAtor = scanner.nextLong();
                     scanner.nextLine();
-                    Map<Long,Filme> filme = _filmeController.getFilmePorId(idFilme);
+                    Map<Long,Filme> filme = _filmeController.getFilmePorId(idFilmeAtor);
                     if(filme == null){
                         limparTela();
                         System.out.println("Filme não Cadastrado!");
@@ -83,13 +83,31 @@ public class Console {
                     }
                     System.out.println();
                     listarAtoresPlataforma();
-                    System.out.printf("Digite o id do(a) ator(ris) ao filme %s: ", filme.get(idFilme).getNome());
+                    System.out.printf("Digite o id do(a) ator(ris) ao filme %s: ", filme.get(idFilmeAtor).getNome());
                     Long idAtor = scanner.nextLong();
                     scanner.nextLine();
-                    addFilmeAoAtor(idAtor,filme.get(idFilme));
+                    addFilmeAoAtor(idAtor,filme.get(idFilmeAtor));
                     limparTela();
                     break;
                 case 7:
+                    limparTela();
+                    getTodosFilmes();
+                    System.out.print("Digite o id do filme escolhido para associar o ator: ");
+                    Long idFilmeDiretor = scanner.nextLong();
+                    scanner.nextLine();
+                    Map<Long,Filme> filmeDiretor = _filmeController.getFilmePorId(idFilmeDiretor);
+                    if(filmeDiretor == null){
+                        limparTela();
+                        System.out.println("Filme não Cadastrado!");
+                        break;
+                    }
+                    System.out.println();
+                    listarDiretoresPlataforma();
+                    System.out.printf("Digite o id do(a) ator(ris) ao filme %s: ", filmeDiretor.get(idFilmeDiretor).getNome());
+                    Long idDiretor = scanner.nextLong();
+                    scanner.nextLine();
+                    addFilmeAoDiretor(idDiretor, filmeDiretor.get(idFilmeDiretor));
+                    limparTela();
                     break;
                 case 8:
                     limparTela();
@@ -106,6 +124,12 @@ public class Console {
 
     private void addFilmeAoAtor(Long idAtor, Filme filme){
         _filmeController.addFilmeAoAtor(idAtor, filme);
+        limparTela();
+        System.out.println("Associação Realizada com Sucesso!");
+    }
+
+    private void addFilmeAoDiretor(Long idDiretor, Filme filme){
+        _filmeController.addFilmeAoDiretor(idDiretor, filme);
         limparTela();
         System.out.println("Associação Realizada com Sucesso!");
     }

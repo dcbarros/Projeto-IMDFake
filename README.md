@@ -27,7 +27,7 @@ _src
 ## Descrição
 Este repositório contém a implementação de uma plataforma fictícia de filmes chamada "IMDFake". A estrutura do projeto está organizada em pacotes representando diferentes partes da aplicação:
 
-###Controller
+### Controller
 
 - AtorController.java: Controlador para operações relacionadas a atores.
 - DiretorController.java: Controlador para operações relacionadas a diretores.

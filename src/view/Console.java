@@ -225,9 +225,10 @@ public class Console {
             scanner.nextLine();
             System.out.print("Digite o Nome do Estúdio: ");
             String estudio = scanner.nextLine();
-            System.out.print("Digite o Score do Filme na Plataforma: ");
+            System.out.print("Digite o Score do Filme na Plataforma, o score deve está entre 0 a 100: ");
             Integer score = scanner.nextInt();
             scanner.nextLine();
+            
             Integer auxiliar = 1;
             String opcaoGenero;
             List<String> generos = new ArrayList<>();
@@ -242,8 +243,10 @@ public class Console {
             }
             
             Filme filme = new Filme(nome, anoLancamento, null, new ArrayList<>(), estudio, generos, score);
+            limparTela();
             _filmeController.addFilme(filme);
-            System.out.println("Filme adicionado com sucesso!");
+
+            
         } catch (Exception e) {
             limparTela();
             System.out.println("Ocorreu um erro na hora de cadastrar o filme.");

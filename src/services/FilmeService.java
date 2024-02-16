@@ -31,7 +31,12 @@ public class FilmeService {
         if(filme.equals(null)){
             System.out.println("Deve-se ter um filme para se adicionar");
         }
-        _filmesRepository.addFilme(filme);
+        if(filme.getScore() < 0 && filme.getScore() > 100){
+            System.out.println("Score inserido é inválido");
+        }else{
+            System.out.println("Filme adicionado com sucesso!");
+            _filmesRepository.addFilme(filme);
+        }
     }
 
     public void addFilmeAoAtor(Long id, Filme filme){

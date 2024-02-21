@@ -1,90 +1,42 @@
 package repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+import db.DbModelRepository;
 import models.Ator;
+import models.Exceptions.InvalidResponse;
 
-public class AtoresRepository {
+public class AtoresRepository extends AbstractRepository{
 
-    private static Long idNext = 1L;
-    private Long id;
-    private Map<Long, Ator> dbAtores;
-    private static AtoresRepository instance;
-
-    private AtoresRepository(){
-        inicializarDados();
+    public AtoresRepository(DbModelRepository bancoDeDados) {
+        super(bancoDeDados);
     }
 
-    public static synchronized AtoresRepository getInstance(){
-        if (instance == null) {
-            instance = new AtoresRepository();
-        }
-        return instance;
-    }
-
-    private void inicializarDados() {
-        this.dbAtores = new HashMap<>();
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Tim Robbins", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Morgan Freeman", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Bob Gunton", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Tom Hanks", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Robin Wrigth", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Gary Sinise", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Brad Pitt", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Edward Norton", "Estados Unidos"));
-        this.id = idNext++;
-        dbAtores.put(id,new Ator("Meat Loaf", "Estados Unidos"));
-    }
-
-    public Map<Long, Ator> getTodos() {
-        return dbAtores;
-    }
-
-    public Ator getAtorPorChave(Long key){
-        if(containsKey(key)){
-            return this.dbAtores.get(key);
-        }
-        return null;
-    }
-
-    public Map<Long, Ator> getAtorPorNome(String nome){
-        for (Map.Entry<Long,Ator> ator : dbAtores.entrySet()) {
-            if(ator.getValue().getNome().equalsIgnoreCase(nome)){
-                Map<Long,Ator> atorEncontrado = new HashMap<>();
-                atorEncontrado.put(ator.getKey(),ator.getValue());
-                return atorEncontrado;
+    public List findByName(String nome){
+        List atores = this.getAll();
+        List atorEncontrado = new ArrayList();
+        for (Object object : atores) {
+            Ator ator = (Ator) object;
+            if(ator.getNome().equalsIgnoreCase(nome) 
+            || ator.getNome().toLowerCase().contains(nome.toLowerCase())){
+                atorEncontrado.add(ator);
             }
         }
-        return null;
+        if(atorEncontrado.size() == 0){return null;}
+        return atorEncontrado;
     }
 
-    public void addAtor(Ator ator){
-        if(!containsAtor(ator)){
-            this.id = idNext++;
-            dbAtores.put(id,ator);
-        }
+    @Override
+    protected Class ModelClass() {
+        return Ator.class;    
     }
 
-    private boolean containsAtor(Ator ator){
-        for (Map.Entry<Long, Ator> atoresBanco : this.dbAtores.entrySet()) {
-            if(atoresBanco.getValue().getNome().equalsIgnoreCase(ator.getNome())){
-                return true;
-            }
-        }
-        return false;
+    @Override
+    protected Boolean idFilter(Object objeto, Long id) {
+        Ator ator = (Ator) objeto;
+        return Objects.equals(ator.getId(), id);
     }
-
-    private boolean containsKey(Long key) {
-        return this.dbAtores.containsKey(key);
-    }
-
+    
 }

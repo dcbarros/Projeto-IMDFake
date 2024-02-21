@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Filme {
 
+    private static Long nextId = 1L;
+    private Long id;
     private String nome;
     private Integer anoLancamento;
     private Diretor diretor;
@@ -27,10 +29,9 @@ public class Filme {
             this.estudio = estudio;
             this.genero = genero;
             this.score = score;
-    }
-    
-    // TODO: Fazer a implementaçao de melhorias do código
-    
+            this.id = nextId;
+            nextId++;
+    }    
 
     public String getNome() {
         return nome;
@@ -51,7 +52,7 @@ public class Filme {
         this.diretor = diretor;
     }
     public List<Ator> getAtores() {
-        return Collections.unmodifiableList(this.atores);
+        return this.atores;
     }
     public void setAtores(List<Ator> atores) {
         this.atores = atores;
@@ -78,6 +79,13 @@ public class Filme {
     public void setScore(Integer score) {
         this.score = score;
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
    
 }

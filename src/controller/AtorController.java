@@ -1,18 +1,39 @@
 package controller;
 
-import java.util.Map;
+import java.util.List;
 
 import models.Ator;
+import models.Filme;
 import services.AtorService;
 
 public class AtorController {
-    AtorService _atoresService = new AtorService();
+    
+    private AtorService atorService = new AtorService();
 
-    public Map<Long,Ator> getAtores(){
-        return _atoresService.getAtores();
+    public void add(Ator ator){
+        this.atorService.addActor(ator);
+    }
+    public void update (Long id, Filme filme){
+        this.atorService.update(id, filme);
     }
 
-    public void addAtor(Ator ator){
-        _atoresService.addAtor(ator);
+    public List getAll(){
+        return this.atorService.getAllActors();
+    }
+
+    public List getActorByName(String input){
+        return atorService.getActorByNome(input);
+    }
+
+    public Ator getActorById(Long id){
+        return atorService.getActorById(id);
+    }
+    
+    public void listAllActors(){
+        this.atorService.listAllActors();
+    }
+
+    public void addMockData(){
+        this.atorService.addMockerData();
     }
 }

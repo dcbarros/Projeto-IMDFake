@@ -1,34 +1,41 @@
 package controller;
 
-import java.util.Map;
+import java.util.List;
 
+import models.Ator;
+import models.Diretor;
 import models.Filme;
 import services.FilmeService;
 
 public class FilmeController {
-    FilmeService _filmeService = new FilmeService();
 
-    public Map<Long, Filme> getFilmes(){
-        return _filmeService.getFilmes();
+    private FilmeService filmeService = new FilmeService();
+
+    public void add(Filme filme){
+        filmeService.add(filme);
     }
 
-    public Map<Long,Filme> getFilmePorNome(String nome){
-        return _filmeService.getFilmePorNome(nome);
+    public void update(Long id, List<Ator> atores, Diretor diretor){
+        filmeService.update(id,atores, diretor);
+    }
+
+    public void listAllFilms(){
+        this.filmeService.listAllFilms();
     }
     
-    public Map<Long,Filme> getFilmePorId(Long id){
-        return _filmeService.getFilmePorId(id);
+    public List getAll(){
+        return this.filmeService.getAllFilms();
     }
 
-    public void addFilme(Filme filme){
-        _filmeService.addFilme(filme);
+    public List getFilmByName(String input){
+        return this.filmeService.getFilmByNome(input);
+    }
+    
+    public Filme getFilmById(Long id){
+        return this.filmeService.getFilmById(id);
     }
 
-    public void addFilmeAoAtor(Long id, Filme filme){
-        _filmeService.addFilmeAoAtor(id, filme);
-    }
-
-    public void addFilmeAoDiretor(Long id, Filme filme){
-        _filmeService.addFilmeAoDiretor(id,filme);
+    public void addMockData(){
+        this.filmeService.addMockerData();
     }
 }

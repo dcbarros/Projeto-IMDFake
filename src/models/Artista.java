@@ -1,7 +1,7 @@
 package models;
 
 public abstract class Artista {
-
+    
     private String nome;
     private String paisOrigem;
 

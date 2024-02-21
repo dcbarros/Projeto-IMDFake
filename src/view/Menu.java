@@ -1,5 +1,7 @@
 package view;
 
+import java.time.LocalDateTime;
+
 import controller.AtorController;
 import controller.DiretorController;
 import controller.FilmeController;
@@ -50,14 +52,20 @@ public class Menu extends AbstractConsole{
                 break;    
             case 4:
                 this.limparTela();
-                System.out.println("Obrigado!");
-                this.fecharScanner();
-                System.exit(1);
+                finalizacaoPrograma();
                 break;       
             default:
                 break;
         }
         execute();
+    }
+
+    private void finalizacaoPrograma(){
+        Integer hora = LocalDateTime.now().getHour();
+        String saudacao = (hora > 0 && hora < 12) ? "um Bom Dia!!" : (hora > 12 && hora < 18) ? "uma Boa Tarde!!" : "uma Boa Noite!!";
+        System.out.printf("Obrigado, tenha %s", saudacao);
+        this.fecharScanner();
+        System.exit(1);
     }
     
 }

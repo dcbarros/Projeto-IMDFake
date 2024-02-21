@@ -3,6 +3,7 @@ package services;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import db.DbModelRepository;
@@ -97,6 +98,16 @@ public class FilmeService {
         return filme;
     }
 
+    public List getFilmsRanking(){
+        List filmesBanco = this.getAllFilms();
+        List filmes = new ArrayList<>(filmesBanco);
+        if(filmes == null){
+            throw new InvalidResponse("Problemas na consulta de filmes");
+        }
+        filmes.sort(Comparator.comparingInt(Filme::getScore).reversed());
+        return filmes;
+    }
+
     public void addMockerData(){
         List<Ator> atores = new ArrayList<>();
         Filme filme1 = new Filme("Oppenheimer",
@@ -107,6 +118,15 @@ public class FilmeService {
          List.of("Biográfia", "Drama", "Histórico"), 
          84);
         this.add(filme1);
+        
+        Filme filme2 = new Filme("A Origem",
+        2010, 
+        null, 
+        atores, 
+        "Universal Studios", 
+        List.of("Ação", "Aventura", "Ficção Ciêntifica"), 
+        88);
+       this.add(filme2);
     }
 
     private Boolean yearIsSame(Filme filme){

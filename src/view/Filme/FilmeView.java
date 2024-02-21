@@ -22,7 +22,8 @@ public class FilmeView extends AbstractConsole{
             "3 - Buscar Filme pelo nome",
             "4 - Adicionar diretor ao Cast de um filme",
             "5 - Adicionar atores ao Cast de um filme",
-            "6 - Voltar",
+            "6 - Ranking de Filmes",
+            "7 - Voltar",
         });
         this.atorController = atorController;
         this.diretorController = diretorController;
@@ -39,7 +40,7 @@ public class FilmeView extends AbstractConsole{
                 break;
             case 2:
                 this.limparTela();
-                new FilmeList(filmeController).execute(scanner);
+                new FilmeList(filmeController).execute(scanner,false);
                 break;
             case 3:
                 this.limparTela();
@@ -54,6 +55,10 @@ public class FilmeView extends AbstractConsole{
                 new FilmeAddActorForm(filmeController, atorController).execute(scanner);
                 break;
             case 6:
+                this.limparTela();
+                new FilmeList(filmeController).execute(scanner,true);
+                break;
+            case 7:
                 this.limparTela();
                 return;
             default:

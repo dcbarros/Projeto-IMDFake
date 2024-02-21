@@ -35,6 +35,10 @@ public class FilmeController {
         return this.filmeService.getFilmById(id);
     }
 
+    public List getRanking(){
+        return filmeService.getFilmsRanking();
+    }
+
     public void addMockData(){
         this.filmeService.addMockerData();
     }

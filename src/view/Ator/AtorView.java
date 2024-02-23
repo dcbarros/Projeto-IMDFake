@@ -12,7 +12,7 @@ public class AtorView extends AbstractConsole{
             "1 - Cadastrar",
             "2 - Listar",
             "3 - Buscar Ator pelo nome",
-            "5 - Voltar",
+            "4 - Voltar",
         });
         this.atorController = atorController;
     }

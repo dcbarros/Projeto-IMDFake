@@ -66,22 +66,26 @@ public class AtorService {
         }
 
     }
+
     public void addMockerData(){
         Ator ator1 = new Ator(
             "Cillian Murphy", 
             "Irlânda");    
-        atoresRepository.add(ator1);
+        
         Ator ator2 = new Ator(
             "Emily Blunt",
              "Inglaterra");
-             atoresRepository.add(ator2);
+        
         Ator ator3 = new Ator(
                 "Matt Damon",
                  "Estados Unidos");
+
+        atoresRepository.add(ator1);
+        atoresRepository.add(ator2);
         atoresRepository.add(ator3);
     }
 
-        private Boolean filmContainsInActorList(Long id, Filme filme){
+    private Boolean filmContainsInActorList(Long id, Filme filme){
         Ator ator = (Ator) atoresRepository.findById(id);
         for (Filme producao : ator.getProducoes()) {
             if(producao.getNome().equalsIgnoreCase(filme.getNome()) && producao.getAnoLancamento().equals(filme.getAnoLancamento())){

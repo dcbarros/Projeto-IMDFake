@@ -26,6 +26,8 @@ public class DiretorService {
         if(diretoresRepository.findByName(diretor.getNome()).size() == 0){
             diretoresRepository.add(diretor);
             System.out.printf("Diretor %s inserido na base de dados\n", diretor.getNome());
+        }else{
+            throw new InvalidResponse("Diretor já cadastrado");
         }
     }
 

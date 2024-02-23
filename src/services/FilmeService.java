@@ -41,7 +41,7 @@ public class FilmeService {
             filmesRepository.add(filme);
         }else{
             if(yearIsSame(filme)){
-                throw new InvalidResponse("Houve um erro ao registrar o filme");
+                throw new InvalidResponse("Esse filme já existe em nossa plataforma");
             }
             filmesRepository.add(filme);
         }
@@ -101,9 +101,6 @@ public class FilmeService {
     public List getFilmsRanking(){
         List filmesBanco = this.getAllFilms();
         List filmes = new ArrayList<>(filmesBanco);
-        if(filmes == null){
-            throw new InvalidResponse("Problemas na consulta de filmes");
-        }
         filmes.sort(Comparator.comparingInt(Filme::getScore).reversed());
         return filmes;
     }
@@ -118,15 +115,6 @@ public class FilmeService {
          List.of("Biográfia", "Drama", "Histórico"), 
          84);
         this.add(filme1);
-        
-        Filme filme2 = new Filme("A Origem",
-        2010, 
-        null, 
-        atores, 
-        "Universal Studios", 
-        List.of("Ação", "Aventura", "Ficção Ciêntifica"), 
-        88);
-       this.add(filme2);
     }
 
     private Boolean yearIsSame(Filme filme){

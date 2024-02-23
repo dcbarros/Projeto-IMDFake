@@ -62,7 +62,7 @@ public class Menu extends AbstractConsole{
 
     private void finalizacaoPrograma(){
         Integer hora = LocalDateTime.now().getHour();
-        String saudacao = (hora > 0 && hora < 12) ? "um Bom Dia!!" : (hora > 12 && hora < 18) ? "uma Boa Tarde!!" : "uma Boa Noite!!";
+        String saudacao = (hora > 0 && hora < 12) ? "um Bom Dia!!" : (hora >= 12 && hora < 18) ? "uma Boa Tarde!!" : "uma Boa Noite!!";
         System.out.printf("Obrigado, tenha %s", saudacao);
         this.fecharScanner();
         System.exit(1);

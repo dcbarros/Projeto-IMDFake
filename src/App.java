@@ -12,5 +12,6 @@ public class App {
         
         Menu menu = new Menu(atorController, diretorController, filmeController);
         menu.execute();
+
     }
 }

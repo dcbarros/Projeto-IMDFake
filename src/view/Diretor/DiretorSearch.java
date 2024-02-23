@@ -17,13 +17,13 @@ public class DiretorSearch {
     }
 
     public void execute(Scanner scanner){
-        System.out.print("Digite o nome do ator que você deseja buscar ou digite ENTER para voltar ao menu: ");
+        System.out.print("Digite o nome do Diretor que você deseja buscar ou digite ENTER para voltar ao menu: ");
         String nome = scanner.nextLine();
         if(nome.isEmpty()){return;}
         try {
-            List atoresEncontrados = this.diretorController.getDirectorByName(nome);
-            System.out.println("\nAtores(rises) encontrados(as): ");
-            for (Object object : atoresEncontrados) {
+            List diretoresEncontrados = this.diretorController.getDirectorByName(nome);
+            System.out.println("\nDiretores(as) encontrados(as): ");
+            for (Object object : diretoresEncontrados) {
                 Diretor diretor = (Diretor) object;
                 System.out.printf("%d - %s (%s)", diretor.getId(), diretor.getNome(), diretor.getPaisOrigem());
                 System.out.println("\nFilmografia: ");

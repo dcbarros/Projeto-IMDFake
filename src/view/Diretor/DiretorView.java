@@ -12,8 +12,7 @@ public class DiretorView extends AbstractConsole{
             "1 - Cadastrar",
             "2 - Listar",
             "3 - Buscar Diretor pelo nome",
-            "4 - Atribuir Filme",
-            "5 - Voltar",
+            "4 - Voltar",
         });
         this.diretorController = diretorController;
     }
@@ -34,7 +33,7 @@ public class DiretorView extends AbstractConsole{
                 this.limparTela();
                 new DiretorSearch(diretorController).execute(this.scanner);
                 break;
-            case 5:
+            case 4:
                 this.limparTela();
                 return;
             default:

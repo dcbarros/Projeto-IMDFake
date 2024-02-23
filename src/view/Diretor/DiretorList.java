@@ -17,7 +17,7 @@ public class DiretorList {
     }
     
     public void execute(Scanner scanner){
-        System.out.println("Lista de Artistas Cadastrados");
+        System.out.println("Lista de Diretores Cadastrados");
         List diretoresLista = this.diretorController.getAll();
 
         for (Object object : diretoresLista) {
